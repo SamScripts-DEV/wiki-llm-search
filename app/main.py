@@ -11,6 +11,11 @@ app = FastAPI()
 def read_root():
     return {"message": "Microservicio LLM para WIKI.js"}
 
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
 @app.post("/search", response_model=SearchResponse)
 def search(request: SearchRequest):
     # 1. Extrae palabras clave de la pregunta
