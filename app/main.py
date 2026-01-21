@@ -1,10 +1,24 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.schemas import SearchRequest, SearchResponse, RelatedPage
 from app.services.llm import extract_keywords
 from app.services.wikijs import search_wikijs, smart_search_wikijs
 from app.config import BASE_WIKI_URL
 
 app = FastAPI()
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://172.32.1.60",
+        "http://172.32.3.58"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")
